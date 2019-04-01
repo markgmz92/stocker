@@ -1,9 +1,20 @@
 class HomeController < ApplicationController
-  def index
-  	@stock = StockQuote::Stock.quote("symbol")
-  end
+	def index
+		if params[:id] == ""
+			@nothing = "Hey, you forgot to enter a symbol"
+		elsif
 
-  def about
-  end
-  
+		if params[:id]
+			begin
+				@stock = StockQuote::Stock.quote(params[:id])
+			rescue 
+				@error = "That stock symbol doesn't exist. Please try again."
+			end
+		end
+	end
+end
+
+	def about
+	end
+
 end
